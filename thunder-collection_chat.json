@@ -1,0 +1,104 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "chat",
+    "dateExported": "2024-01-22T06:18:20.683Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "d913b5ea-66d6-4c7a-b98e-b4a8239d03de",
+            "name": "message",
+            "containerId": "",
+            "created": "2024-01-21T12:13:42.735Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "84da7b7e-2a3b-4221-a0fe-d53650e49068",
+            "name": "programmer",
+            "containerId": "",
+            "created": "2024-01-21T12:15:35.253Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "9d1e02ca-8ed1-4612-a881-e5f0c06bb142",
+            "colId": "a5549a0a-34d4-4763-9de7-f437334f83d4",
+            "containerId": "d913b5ea-66d6-4c7a-b98e-b4a8239d03de",
+            "name": "getMessageId",
+            "url": "http://localhost:4000/messages/1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-01-21T12:13:55.591Z",
+            "modified": "2024-01-21T14:29:11.731Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "30f83050-7046-486c-8b0b-ed77ef83d3d9",
+            "colId": "a5549a0a-34d4-4763-9de7-f437334f83d4",
+            "containerId": "d913b5ea-66d6-4c7a-b98e-b4a8239d03de",
+            "name": "createMessage",
+            "url": "http://localhost:4000/messages/new",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-01-21T12:14:21.828Z",
+            "modified": "2024-01-22T06:16:54.016Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"senderId\": 1,\n  \"receiverId\":2,\n  \"sender_name\": \"Eduardo\",\n  \"content\": \"Hola\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "aaf93376-d346-4fc5-82f0-68a8403e8892",
+            "colId": "a5549a0a-34d4-4763-9de7-f437334f83d4",
+            "containerId": "84da7b7e-2a3b-4221-a0fe-d53650e49068",
+            "name": "getAllProgrammers",
+            "url": "http://localhost:4000/programmer",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-01-21T12:15:44.551Z",
+            "modified": "2024-01-21T12:16:10.946Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5e26552f-a795-497e-a675-f0457788a402",
+            "colId": "a5549a0a-34d4-4763-9de7-f437334f83d4",
+            "containerId": "84da7b7e-2a3b-4221-a0fe-d53650e49068",
+            "name": "createProgrammer",
+            "url": "http://localhost:4000/programmer",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-01-21T12:16:40.188Z",
+            "modified": "2024-01-22T06:16:38.677Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Carlos\",\n  \"email\": \"programador3@gmail.com\",\n  \"password\": \"1111\",\n  \"gitLink\": \"https://github.com/ejemplo\",\n  \"instagram_link\": \"https://www.instagram.com/ejemplo\",\n  \"linkedin_link\": \"https://www.linkedin.com/in/ejemplo\",\n  \"phoneNumber\": \"123456789\",\n  \"skills\": \"JavaScript, React, Node.js\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "23c6bce8-c416-4ad3-a497-e9228f3f12fc",
+            "colId": "a5549a0a-34d4-4763-9de7-f437334f83d4",
+            "containerId": "d913b5ea-66d6-4c7a-b98e-b4a8239d03de",
+            "name": "getNewMessage",
+            "url": "http://localhost:4000/messages/message/nuevo",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-01-22T04:40:49.530Z",
+            "modified": "2024-01-22T05:47:46.569Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
