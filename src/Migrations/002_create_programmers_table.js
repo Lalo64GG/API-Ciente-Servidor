@@ -11,11 +11,8 @@ const db = require('../Config/db');
         name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        git_link TEXT,
-        instagram_link TEXT,
-        linkedin_link TEXT,
-        phone_number TEXT,
-        skills TEXT
+        skills TEXT,
+        Grupo INTEGER
       )
     `);
 

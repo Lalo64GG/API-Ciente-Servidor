@@ -11,6 +11,7 @@ const db = require('../Config/db');
         sender_id INTEGER NOT NULL,
         receiver_id INTEGER NOT NULL,
         sender_name TEXT NOT NULL,
+        receiver_name TEXT NOT NULL,
         content TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (sender_id) REFERENCES programmers(id),

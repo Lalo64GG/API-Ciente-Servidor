@@ -1,14 +1,14 @@
 const db = require('../Config/db');
 
 class MessageService {
-  static async createMessage(senderId, receiverId, sender_name, content) {
+  static async createMessage(senderId, receiverId, sender_name, receiver_name, content) {
     try {
       const connection = await db.createConnection();
 
       await connection.run(`
-        INSERT INTO messages (sender_id, receiver_id, sender_name, content)
-        VALUES (?, ?, ?, ?)
-      `, [senderId, receiverId, sender_name, content]);
+        INSERT INTO messages (sender_id, receiver_id, sender_name, receiver_name, content)
+        VALUES (?, ?, ?, ?, ?)
+      `, [senderId, receiverId, sender_name, receiver_name, content]);
 
       console.log('Mensaje creado con éxito.');
 

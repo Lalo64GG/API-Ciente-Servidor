@@ -7,6 +7,7 @@ let resMessage = [];
 const getMessages = async (req, res) => {
   try {
     const sender_id = req.params.senderId;
+    const receiver_id = req.params.receiverId;
     console.log(sender_id);
     const message = await MessageService.getMessages(sender_id);
 
@@ -34,11 +35,11 @@ const getNuevoMessage = (req, res) => {
 
 const createMessage = async (req, res) => {
   try {
-    const { senderId, receiverId, sender_name, content } = req.body;
+    const { senderId, receiverId, sender_name, receiver_name, content } = req.body;
 
-    await MessageService.createMessage(senderId, receiverId, sender_name, content);
+    await MessageService.createMessage(senderId, receiverId, sender_name, receiver_name, content);
 
-    const newMessage = { senderId, receiverId, sender_name, content };
+    const newMessage = { senderId, receiverId, sender_name, receiver_name, content };
 
 
     responderMenssage(newMessage);
