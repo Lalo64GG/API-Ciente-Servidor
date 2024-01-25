@@ -41,9 +41,10 @@ class ServerAPI {
         console.log(`Cliente ${socket.id} se unió a la sala ${room}`);
       });
 
-      socket.on('messageToRoom', (data) => {
-        io.to(data.room).emit('message', {
-          body: data.text,
+      socket.on('messageToRoom', (body) => {
+        console.log(body);
+          socket.to(body.room).emit('message', {
+          body: body.text,
           from: socket.id.slice(6),
         });
       });
@@ -71,7 +72,6 @@ class ServerAPI {
       console.log(`Server is running on port ${this.port +1}`);
     });
   }
-  
   async conectarDB() {
     try {
       await createConnection();
