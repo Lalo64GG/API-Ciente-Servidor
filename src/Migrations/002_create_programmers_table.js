@@ -12,7 +12,6 @@ const db = require('../Config/db');
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         skills TEXT,
-        Grupo INTEGER
       )
     `);
 

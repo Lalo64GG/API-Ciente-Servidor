@@ -3,8 +3,8 @@ const programmerService = require('../Service/programmer.service');
 
 const createProgrammer = async (req, res) => {
   try {
-    const { name, email, password, gitLink, instagramLink, linkedinLink, phoneNumber, skills } = req.body;
-    const result = await programmerService.createProgrammer(name, email, password, gitLink, instagramLink, linkedinLink, phoneNumber, skills);
+    const { name, email, password, phoneNumber, skills } = req.body;
+    const result = await programmerService.createProgrammer(name, email, password, phoneNumber, skills);
     res.json(result);
   } catch (error) {
     console.error('Error al crear el programador:', error);

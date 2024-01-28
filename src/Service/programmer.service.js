@@ -1,14 +1,14 @@
 // services/programmerService.js
 const db = require('../Config/db');
 
-async function createProgrammer(name, email, password, gitLink, instagramLink, linkedinLink, phoneNumber, skills) {
+async function createProgrammer(name, email, password, phoneNumber, skills) {
   try {
     const connection = await db.createConnection();
 
     await connection.run(`
-      INSERT INTO programmers (name, email, password, git_link, instagram_link, linkedin_link, phone_number, skills)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `, [name, email, password, gitLink, instagramLink, linkedinLink, phoneNumber, skills]);
+      INSERT INTO programmers (name, email, password, phone_number, skills)
+      VALUES (?, ?, ?, ?, ?)
+    `, [name, email, password, phoneNumber, skills]);
 
     console.log('Programador creado con éxito.');
 

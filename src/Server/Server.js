@@ -5,8 +5,9 @@ const socketIo = require("socket.io");
 const { createConnection } = require("../Config/db");
 const messageRouter = require("../Routes/Menssage.route");
 const programmerRouter = require("../Routes/programmer.routes");
-const socketServer = require("../LongPolling/socket");
+const routerLogin = require("../Routes/login.Routes")
 const { format } = require("path");
+const jwt = require('jsonwebtoken');
 
 class ServerAPI {
   constructor() {
@@ -19,22 +20,45 @@ class ServerAPI {
     this.initializeSocketIO();
   }
 
-  initializeSocketIO() {
+    initializeSocketIO() {
     const server = http.createServer(this.app);
+    const clientes = []
     const io = socketIo(server, {
       cors: {
         origin: "http://localhost:5173",
         methods: ["GET", "POST"],
       },
     });
+    io.on("connection", async (socket) => {
+      if (socket.handshake.headers.authorization) {
+        const token = socket.handshake.headers.authorization.split(' ')[1];
+ 
+        // Verifica y decodifica el token
+        jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzA2MjQxNDk2LCJleHAiOjE3MDYyNDUwOTZ9.OmCiiMeQjrVOnWn7K-2qZZ7q4zbKV3kOey_Fz28bV3w", 'tu_secreto_secreto', async (err, decoded) => {
+          if (err) {
+            // Manejar error de token no válido
+            console.error('Error de autenticación:', err);
+            socket.disconnect();
+            return;
+          }
 
-    // Lista de clientes en línea
-    let clientes = [];
+          // El token es válido, puedes acceder a la información del usuario desde 'decoded'
+          const userId = decoded.id;
+          console.log("User id: ", userId);
 
-    io.on("connection", (socket) => {
-      console.log(`Nuevo cliente de Socket.IO conectado: ${socket.id}`);
+          // Ejecuta la conexión a la base de datos solo si userId cumple con las condiciones
+          if (userId && userId > 0) {
+            try {
+              await this.conectarDB();
+            } catch (error) {
+              console.error("Error connecting to the database:", error.message);
+              process.exit(1);
+            }
+          }
+
+          // Resto del código...
+        });
       clientes.push(socket.id)
-        console.log("Clientes conectados:", clientes.length );
 
       socket.on('joinRoom', (room) => {
         socket.join(room);
@@ -62,7 +86,7 @@ class ServerAPI {
         console.log(`Cliente ${socket.id} desconectado`);
         clientes.splice(clientes.indexOf(socket.id), 1);
       });
-    });
+    }});
 
     this.app.get("/clientes", (req, res) => {
       res.json({ clientesEnLinea: clientes.length });
@@ -90,6 +114,7 @@ class ServerAPI {
   routes() {
     this.app.use("/messages", messageRouter);
     this.app.use("/programmer", programmerRouter);
+    this.app.use("/login", routerLogin );
   }
 
   listen() {
