@@ -6,7 +6,7 @@ const { authMiddleware } = require('../Middlewares/validarjwt');
 const router = Router();
 
 // Rutas
-router.post('/', programmerController.createProgrammer);
-router.get('/',authMiddleware, programmerController.getAllProgrammers);
+router.post('/', authMiddleware,programmerController.createProgrammer);
+router.get('/',programmerController.getAllProgrammers);
 
 module.exports = router;

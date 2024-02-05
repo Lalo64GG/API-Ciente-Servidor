@@ -32,9 +32,10 @@ class ServerAPI {
     io.on("connection", async (socket) => {
       if (socket.handshake.headers.authorization) {
         const token = socket.handshake.headers.authorization.split(' ')[1];
+        console.log("token", token);
  
         // Verifica y decodifica el token
-        jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzA2MjQxNDk2LCJleHAiOjE3MDYyNDUwOTZ9.OmCiiMeQjrVOnWn7K-2qZZ7q4zbKV3kOey_Fz28bV3w", 'tu_secreto_secreto', async (err, decoded) => {
+        jwt.verify(token, 'tu_secreto_secreto', async (err, decoded) => {
           if (err) {
             // Manejar error de token no válido
             console.error('Error de autenticación:', err);
@@ -45,6 +46,9 @@ class ServerAPI {
           // El token es válido, puedes acceder a la información del usuario desde 'decoded'
           const userId = decoded.id;
           console.log("User id: ", userId);
+          if (!clientes.includes(userId)) {
+            clientes.push(userId);
+          }
 
           // Ejecuta la conexión a la base de datos solo si userId cumple con las condiciones
           if (userId && userId > 0) {
@@ -56,10 +60,7 @@ class ServerAPI {
             }
           }
 
-          // Resto del código...
         });
-      clientes.push(socket.id)
-
       socket.on('joinRoom', (room) => {
         socket.join(room);
         console.log(`Cliente ${socket.id} se unió a la sala ${room}`);

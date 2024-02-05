@@ -3,8 +3,8 @@ const router = express.Router();
 const messageController = require('../Controllers/message.controller');
 const { authMiddleware } = require('../Middlewares/validarjwt');
 
-router.get('/:senderId', authMiddleware ,messageController.getMessages);
-router.get('/message/nuevo', authMiddleware ,messageController.getNuevoMessage);
-router.post('/new', authMiddleware ,messageController.createMessage);
+router.get('/:senderId',messageController.getMessages);
+router.get('/message/nuevo' ,messageController.getNuevoMessage);
+router.post('/new',messageController.createMessage);
 
 module.exports = router;
